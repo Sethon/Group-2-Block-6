@@ -22,6 +22,15 @@ public abstract class ParametricSurface3D implements Surface3D {
 	public abstract double computeY(double t, double s);
 	public abstract double computeZ(double t, double s);
 	
+	public abstract double computeXt(double t, double s);
+	public abstract double computeXs(double t, double s);
+	
+	public abstract double computeYt(double t, double s);
+	public abstract double computeYs(double t, double s);
+	
+	public abstract double computeZt(double t, double s);
+	public abstract double computeZs(double t, double s);
+	
 	public Vector3D computeR(double t, double s) {
 		Vector3D a = I_VECTOR.scalarMultiply(computeX(t, s));
 		Vector3D b = J_VECTOR.scalarMultiply(computeY(t, s));
