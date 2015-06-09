@@ -41,6 +41,26 @@ public abstract class ParametricSurface3D implements Surface3D {
 		return d.add(c);
 	}
 	
+	public Vector3D computeRt(double t, double s) {
+		Vector3D a = I_VECTOR.scalarMultiply(computeXt(t, s));
+		Vector3D b = J_VECTOR.scalarMultiply(computeYt(t, s));
+		Vector3D c = K_VECTOR.scalarMultiply(computeZt(t, s));
+		
+		Vector3D d = a.add(b);
+		
+		return d.add(c);
+	}
+	
+	public Vector3D computeRs(double t, double s) {
+		Vector3D a = I_VECTOR.scalarMultiply(computeXs(t, s));
+		Vector3D b = J_VECTOR.scalarMultiply(computeYs(t, s));
+		Vector3D c = K_VECTOR.scalarMultiply(computeZs(t, s));
+		
+		Vector3D d = a.add(b);
+		
+		return d.add(c);
+	}
+	
 	public double surfaceArea() {
 		return 0.0;
 	}
