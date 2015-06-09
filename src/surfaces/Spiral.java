@@ -33,37 +33,31 @@ public class Spiral extends ParametricSurface3D {
 
 	@Override
 	public double computeXt(double t, double s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.cos(2 * Math.PI * s);
 	}
 
 	@Override
 	public double computeXs(double t, double s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return - 2 * Math.PI * t * Math.sin(2 * Math.PI * s);
 	}
 
 	@Override
 	public double computeYt(double t, double s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.sin(2 * Math.PI * s);
 	}
 
 	@Override
 	public double computeYs(double t, double s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2 * Math.PI * t * Math.cos(2 * Math.PI * s);
 	}
 
 	@Override
 	public double computeZt(double t, double s) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double computeZs(double t, double s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }
