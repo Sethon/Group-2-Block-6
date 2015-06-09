@@ -162,10 +162,10 @@ public class SpaceModel {
 	}
 	
 	public void updateRes(double delta) {
-		if (res > 2 && delta <= 0) {
+		if (res > 2 && delta >= 0) {
 			res = res - 2;
 		}
-		else if (res < 20000 && delta >= 0) {
+		else if (res < 20000 && delta <= 0) {
 			res = res + 2;
 		}
 	}
