@@ -3,11 +3,13 @@ package surfaces;
 
 import java.util.ArrayList;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 public abstract class ParametricSurface3D implements Surface3D {
 	//unit vectors
-	protected static final double[] 	I_VECTOR = new double[] {1.0, 0.0, 0.0};
-	protected static final double[] 	J_VECTOR = new double[] {0.0, 1.0, 0.0};
-	protected static final double[] 	K_VECTOR = new double[] {0.0, 0.0, 1.0};
+	protected static final Vector3D 	I_VECTOR = new Vector3D(1.0, 0.0, 0.0);
+	protected static final Vector3D 	J_VECTOR = new Vector3D(0.0, 1.0, 0.0);
+	protected static final Vector3D 	K_VECTOR = new Vector3D(0.0, 0.0, 1.0);
 	
 	protected double 	t0;
 	protected double 	t1;
@@ -20,15 +22,14 @@ public abstract class ParametricSurface3D implements Surface3D {
 	public abstract double computeY(double t, double s);
 	public abstract double computeZ(double t, double s);
 	
-	public double[] computeR(double t, double s) {
-		double[] r = new double[3];
+	public Vector3D computeR(double t, double s) {
+		Vector3D a = I_VECTOR.scalarMultiply(computeX(t, s));
+		Vector3D b = J_VECTOR.scalarMultiply(computeY(t, s));
+		Vector3D c = K_VECTOR.scalarMultiply(computeZ(t, s));
 		
-		for (int i = 0; i < 3; i++) {
-			r[i] = computeX(t, s) * I_VECTOR[i] + 
-					computeY(t, s) * J_VECTOR[i] + computeZ(t, s) * K_VECTOR[i];
-		}
+		Vector3D d = a.add(b);
 		
-		return r;
+		return d.add(c);
 	}
 	
 	public double surfaceArea() {
