@@ -34,4 +34,34 @@ public class Torus extends ParametricSurface3D {
 	public String toString() {
 		return "Torus - " + super.toString() + "\n" + "R = " + R + "; r = " + r;
 	}
+
+	@Override
+	public double computeXt(double t, double s) {
+		return r * Math.cos(s) * (- Math.sin(t));
+	}
+
+	@Override
+	public double computeXs(double t, double s) {
+		return R * (- Math.sin(s)) + r * Math.cos(t) * (- Math.sin(s));
+	}
+
+	@Override
+	public double computeYt(double t, double s) {
+		return r * (- Math.sin(t)) * Math.sin(s);
+	}
+
+	@Override
+	public double computeYs(double t, double s) {
+		return R * Math.cos(s) + r * Math.cos(t) * Math.cos(s);
+	}
+
+	@Override
+	public double computeZt(double t, double s) {
+		return r * Math.cos(t);
+	}
+
+	@Override
+	public double computeZs(double t, double s) {
+		return 0;
+	}
 }

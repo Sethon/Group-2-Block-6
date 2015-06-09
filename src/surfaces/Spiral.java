@@ -30,4 +30,40 @@ public class Spiral extends ParametricSurface3D {
 	public String toString() {
 		return "Spiral - " + super.toString();
 	}
+
+	@Override
+	public double computeXt(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeXs(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeYt(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeYs(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeZt(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeZs(double t, double s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
