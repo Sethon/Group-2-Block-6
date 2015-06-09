@@ -115,12 +115,12 @@ public class SpaceModel {
 						p3d3.getY(), p3d3.getZ()))),
 						(int) (y0 + res * planeY.getOffset(new Vector3D(p3d3.getX(), 
 						p3d3.getY(), p3d3.getZ()))), 2);
-				Color c = new Color((float)(1.0 * Math.abs(p3d1.getX())/10.0), 
-						(float) (1.0 * Math.abs(p3d1.getY())/10.0), 
-						(float) (1.0 * Math.abs(p3d1.getZ())/10.0), 
-						(float) (0.2 /* Math.abs(p3d3.getZ())/200.0*/));
-				GUITriangleColored guiTr = new GUITriangleColored(p1, p2, p3, c); //colored mode 
-				//GUITriangle guiTr = new GUITriangle(p1, p2, p3);
+				/*Color c = new Color((float)(1.0 * Math.abs(p3d1.getX())/10.0 % 1.0), 
+						(float) (1.0 * Math.abs(p3d1.getY())/10.0 % 1.0), 
+						(float) (1.0 * Math.abs(p3d1.getZ())/10.0 % 1.0), 
+						(float) (0.2));*/
+				//GUITriangleColored guiTr = new GUITriangleColored(p1, p2, p3, c); //colored mode 
+				GUITriangle guiTr = new GUITriangle(p1, p2, p3);
 				tmp.add(guiTr);
 			}
 		}
