@@ -1,15 +1,18 @@
 package application;
 
 import gui.Drawable;
-import gui.GUIAxis;
 import gui.GUIPoint;
 import gui.GUITriangle;
+import gui.GUITriangleColored;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Plane;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
+import plyer.PLYWriter;
+import surfaces.FVPolygonMesh;
 import surfaces.Point3D;
 import surfaces.Surface3D;
 import surfaces.Triangle3D;
@@ -18,7 +21,7 @@ public class SpaceModel {
 	private static final double PHI_X 		 = 0.05;
 	private static final double PHI_Y		 = 0.05; 
 	private static final double PHI_Z		 = 0.05;
-	private static final double MOVE_FACTOR	 = 0.5;
+	private static final double MOVE_FACTOR	 = 2;
 	private static final int	ERROR	 	 = 5; 
 	
 	private Vector3D xVector				 = new Vector3D(1, 0, 0);
@@ -85,11 +88,15 @@ public class SpaceModel {
 	
 	@SuppressWarnings("deprecation")
 	public ArrayList<Drawable> getDrawables() {
+		controlPoints = new ArrayList<>();
+		
 		Plane planeX = new Plane(xVector);
 		Plane planeY = new Plane(yVector);
 		ArrayList<Drawable> tmp = new ArrayList<>();
 		
 		for (Surface3D s : surfaces) {
+			controlPoints.addAll(s.vertices());
+			
 			ArrayList<Triangle3D> triangles = s.triangulate();
 			for (Triangle3D t : triangles) {
 				ArrayList<Point3D> vertices = t.vertices();
@@ -99,27 +106,32 @@ public class SpaceModel {
 				GUIPoint p1 = new GUIPoint((int) (x0 + res * planeX.getOffset(new Vector3D(p3d1.getX(), 
 						p3d1.getY(), p3d1.getZ()))),
 						(int) (y0 + res * planeY.getOffset(new Vector3D(p3d1.getX(), 
-						p3d1.getY(), p3d1.getZ()))),0);
+						p3d1.getY(), p3d1.getZ()))), 2);
 				GUIPoint p2 = new GUIPoint((int) (x0 + res * planeX.getOffset(new Vector3D(p3d2.getX(), 
 						p3d2.getY(), p3d2.getZ()))),
 						(int) (y0 + res * planeY.getOffset(new Vector3D(p3d2.getX(), 
-						p3d2.getY(), p3d2.getZ()))),0);
+						p3d2.getY(), p3d2.getZ()))), 2);
 				GUIPoint p3 = new GUIPoint((int) (x0 + res * planeX.getOffset(new Vector3D(p3d3.getX(), 
 						p3d3.getY(), p3d3.getZ()))),
 						(int) (y0 + res * planeY.getOffset(new Vector3D(p3d3.getX(), 
-						p3d3.getY(), p3d3.getZ()))),0);
-				GUITriangle guiTr = new GUITriangle(p1, p2, p3);
+						p3d3.getY(), p3d3.getZ()))), 2);
+				Color c = new Color((float)(1.0 * Math.abs(p3d1.getX())/10.0), 
+						(float) (1.0 * Math.abs(p3d1.getY())/10.0), 
+						(float) (1.0 * Math.abs(p3d1.getZ())/10.0), 
+						(float) (0.2 /* Math.abs(p3d3.getZ())/200.0*/));
+				GUITriangleColored guiTr = new GUITriangleColored(p1, p2, p3, c); //colored mode 
+				//GUITriangle guiTr = new GUITriangle(p1, p2, p3);
 				tmp.add(guiTr);
 			}
 		}
 		
-		for (Point3D p : controlPoints) {
+		/*for (Point3D p : controlPoints) {
 			GUIPoint pG = new GUIPoint((int) (x0 + res * planeX.getOffset(new Vector3D(p.getX(), 
 					p.getY(), p.getZ()))),
 					(int) (y0 + res * planeY.getOffset(new Vector3D(p.getX(), 
 					p.getY(), p.getZ()))), 2);
 			tmp.add(pG);
-		}
+		}*/
 		
 		return tmp;
 	}
@@ -150,11 +162,26 @@ public class SpaceModel {
 	}
 	
 	public void updateRes(double delta) {
-		if (res > 10 && delta <= 0) {
+		if (res > 2 && delta <= 0) {
 			res = res - 2;
 		}
-		else if (res < 200 && delta >= 0) {
+		else if (res < 20000 && delta >= 0) {
 			res = res + 2;
 		}
+	}
+	
+	//===========TEMPORARY===========
+	public void addPointToMesh(Point3D p) {
+		Surface3D s = surfaces.get(surfaces.size() - 1);
+		FVPolygonMesh m = (FVPolygonMesh) s;
+		m.addVertex(p);
+	}
+	
+	//===========TEMPORARY===========
+	public void saveMesh() {
+		Surface3D s = surfaces.get(surfaces.size() - 1);
+		FVPolygonMesh m = (FVPolygonMesh) s;
+		PLYWriter wr = new PLYWriter();
+		wr.writeFVMesh("mesh_trial", m);
 	}
 }

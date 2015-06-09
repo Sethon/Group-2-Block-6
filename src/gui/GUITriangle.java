@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class GUITriangle implements Drawable {
-	private static final Color TRIANGLE_COLOR = Color.GRAY;
+	protected static final Color TRIANGLE_COLOR = Color.GRAY;
 	
-	private GUIPoint p1;
-	private GUIPoint p2;
-	private GUIPoint p3;
+	protected GUIPoint p1;
+	protected GUIPoint p2;
+	protected GUIPoint p3;
 	
 	public GUITriangle(GUIPoint p1, GUIPoint p2, GUIPoint p3) {
 		this.p1 = p1;

@@ -52,4 +52,8 @@ public class Point3D {
 	public Point3D clone() {
 		return new Point3D(x, y, z);
 	}
+	
+	public double dist(Point3D p) {
+		return Math.sqrt(Math.pow(p.getX() - x, 2) + Math.pow(p.getY() - y, 2) + Math.pow(p.getZ() - z, 2));
+	}
 }
