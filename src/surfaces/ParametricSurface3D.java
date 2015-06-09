@@ -61,6 +61,7 @@ public abstract class ParametricSurface3D implements Surface3D {
 		return d.add(c);
 	}
 	
+	//IIr||RtxRs||dtds
 	public double surfaceArea() {
 		return 0.0;
 	}
