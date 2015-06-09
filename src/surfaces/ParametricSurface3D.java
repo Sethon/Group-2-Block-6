@@ -4,6 +4,11 @@ package surfaces;
 import java.util.ArrayList;
 
 public abstract class ParametricSurface3D implements Surface3D {
+	//unit vectors
+	protected double[] 	iVector = new double[] {1.0, 0.0, 0.0};
+	protected double[] 	jVector = new double[] {0.0, 1.0, 0.0};
+	protected double[] 	kVector = new double[] {0.0, 0.0, 1.0};
+	
 	protected double 	t0;
 	protected double 	t1;
 	protected double 	s0;
@@ -14,6 +19,17 @@ public abstract class ParametricSurface3D implements Surface3D {
 	public abstract double computeX(double t, double s);
 	public abstract double computeY(double t, double s);
 	public abstract double computeZ(double t, double s);
+	
+	public double[] computeR(double t, double s) {
+		double[] r = new double[3];
+		
+		for (int i = 0; i < 3; i++) {
+			r[i] = computeX(t, s) * iVector[i] + 
+					computeY(t, s) * jVector[i] + computeZ(t, s) * kVector[i];
+		}
+		
+		return r;
+	}
 	
 	public double surfaceArea() {
 		return 0.0;
