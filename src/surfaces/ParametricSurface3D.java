@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public abstract class ParametricSurface3D implements Surface3D {
 	//unit vectors
-	protected double[] 	iVector = new double[] {1.0, 0.0, 0.0};
-	protected double[] 	jVector = new double[] {0.0, 1.0, 0.0};
-	protected double[] 	kVector = new double[] {0.0, 0.0, 1.0};
+	protected static final double[] 	I_VECTOR = new double[] {1.0, 0.0, 0.0};
+	protected static final double[] 	J_VECTOR = new double[] {0.0, 1.0, 0.0};
+	protected static final double[] 	K_VECTOR = new double[] {0.0, 0.0, 1.0};
 	
 	protected double 	t0;
 	protected double 	t1;
@@ -24,8 +24,8 @@ public abstract class ParametricSurface3D implements Surface3D {
 		double[] r = new double[3];
 		
 		for (int i = 0; i < 3; i++) {
-			r[i] = computeX(t, s) * iVector[i] + 
-					computeY(t, s) * jVector[i] + computeZ(t, s) * kVector[i];
+			r[i] = computeX(t, s) * I_VECTOR[i] + 
+					computeY(t, s) * J_VECTOR[i] + computeZ(t, s) * K_VECTOR[i];
 		}
 		
 		return r;
