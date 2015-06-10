@@ -94,7 +94,8 @@ public class FVPolygonMesh extends PolygonMesh {
 	
 	@Override
 	public String toString() {
-		return "Face-Vertex Polygon Mesh";
+		return "Face-Vertex Polygon Mesh" + "\n" + "Vertices: " + vertices.size() + 
+				"\n" + "Faces: " + faces.size();
 	}
 
 	@Override
