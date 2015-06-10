@@ -66,9 +66,9 @@ public abstract class ParametricSurface3D implements Surface3D {
 	public double surfaceArea() {
 		double[] It = new double[INTEGRATION_STEPS + 1]; //Divide s in 100 parts
 		double stepsize = (t1-t0)/INTEGRATION_STEPS;
-		for(int i = 0; i<It.length; i++) {
-			double valS = s0 + (s1-s0)/INTEGRATION_STEPS*i;
-			It[i] = trapezoid(stepsize,valS,t0,t1);
+		for(int i = 0; i < It.length; i++) {
+			double valS = s0 + (s1 - s0)/INTEGRATION_STEPS*i;
+			It[i] = trapezoid(stepsize, valS, t0, t1);
 		}
 		double Is = simpson(It, (s1 - s0)/INTEGRATION_STEPS);
 		return Is;
@@ -78,15 +78,15 @@ public abstract class ParametricSurface3D implements Surface3D {
 		double I = 0;
 		for(double i = t0; i <= tn + 10E-14; i+=step) {
 			if(i==t0 || (i <= tn + 10E-14 && i >= tn - 10E-14)) {
-				Vector3D Rt = computeRt(i,x); 
-				Vector3D Rs = computeRs(i,x);
+				Vector3D Rt = computeRt(i, x); 
+				Vector3D Rs = computeRs(i, x);
 				Vector3D R = Rt.crossProduct(Rs);
 				double norm = R.getNorm();
-				I += 0.5*norm;
+				I += 0.5 * norm;
 			}
 			else {
-				Vector3D Rt = computeRt(i,x); 
-				Vector3D Rs = computeRs(i,x);
+				Vector3D Rt = computeRt(i, x); 
+				Vector3D Rs = computeRs(i, x);
 				Vector3D R = Rt.crossProduct(Rs);
 				double norm = R.getNorm();
 				I += norm;
@@ -98,15 +98,15 @@ public abstract class ParametricSurface3D implements Surface3D {
 	
 	private double simpson(double[] It, double stepsize) {
 		double Is = 0;
-		for(int i = 0; i <It.length; i++) {
-			if(i==0 || i==It.length-1) {
+		for(int i = 0; i < It.length; i++) {
+			if(i == 0 || i == It.length-1) {
 				Is += It[i];
 			}
 			else if(i%2 == 0) {
-				Is += (2*It[i]);
+				Is += (2 * It[i]);
 			}
 			else {
-				Is += (4*It[i]);
+				Is += (4 * It[i]);
 			}
 		}
 		Is = Is * (stepsize/3);
