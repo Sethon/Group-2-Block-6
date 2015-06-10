@@ -46,7 +46,7 @@ public class Tetrahedron implements Surface3D {
 		Triangle3D t3 = new Triangle3D(p1,p3,p4);
 		Triangle3D t4 = new Triangle3D(p2,p3,p4);
 		
-		return (t1.Area()+t2.Area()+t3.Area()+t4.Area());
+		return (t1.area()+t2.area()+t3.area()+t4.area());
 	}
 	
 	public double volume(boolean signed){
