@@ -30,7 +30,7 @@ public class Triangle3D implements Surface3D {
 		return tmp;
 	}
 	
-	public double area(){
+	public double surfaceArea(){
 		
 		double u = p1.dist(p2);
 		double v = p1.dist(p3);

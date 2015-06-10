@@ -97,4 +97,9 @@ public class FVPolygonMesh extends PolygonMesh {
 		return "Face-Vertex Polygon Mesh";
 	}
 
+	@Override
+	public double surfaceArea() {
+		return 0;
+	}
+
 }

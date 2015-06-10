@@ -46,7 +46,7 @@ public class Tetrahedron implements Surface3D {
 		Triangle3D t3 = new Triangle3D(p1,p3,p4);
 		Triangle3D t4 = new Triangle3D(p2,p3,p4);
 		
-		return (t1.area()+t2.area()+t3.area()+t4.area());
+		return (t1.surfaceArea() + t2.surfaceArea() + t3.surfaceArea() + t4.surfaceArea());
 	}
 	
 	public double volume(boolean signed){
@@ -66,7 +66,9 @@ public class Tetrahedron implements Surface3D {
 		double m = p4.getY();
 		double n = p4.getZ();
 		
-		double signedVol = (1.0/6.0)*(n*(-a*f+(a-e)*j+i*(f-b)+e*b)+k*(a*f+o*(b-f)-e*b)+m*(a*g+(e-a)*k+i*(c-g)-e*c)+j*(e*c-a*g)+i*(b*g-c*f)+o*(-b*g+c*f+j*(g-c)));
+		double signedVol = (1.0/6.0) * (n * (-a * f + (a - e) * j + i * (f - b) + e * b)
+				+ k * (a * f + o * (b - f) - e * b) + m * (a * g + (e - a) * k + i * (c - g) - e * c)
+				+ j * (e * c - a * g) + i * (b * g - c * f) + o * (-b * g + c * f + j * (g - c)));
 		
 		if (signed) {
 			return signedVol;
