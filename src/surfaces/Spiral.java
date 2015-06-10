@@ -28,7 +28,8 @@ public class Spiral extends ParametricSurface3D {
 	
 	@Override
 	public String toString() {
-		return "Spiral - " + super.toString();
+		return "Spiral - " + super.toString() + 
+				"\n" + "Surface area: " + super.surfaceArea();
 	}
 
 	@Override
