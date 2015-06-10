@@ -95,12 +95,28 @@ public class FVPolygonMesh extends PolygonMesh {
 	@Override
 	public String toString() {
 		return "Face-Vertex Polygon Mesh" + "\n" + "Vertices: " + vertices.size() + 
-				"\n" + "Faces: " + faces.size();
+				"\n" + "Faces: " + faces.size() + "\n" + "Surface area: " + surfaceArea() + " sq. u." +
+				"\n" + "Volume: " + volume() + " cub. u.";
 	}
 
 	@Override
 	public double surfaceArea() {
-		return 0;
+		double sum = 0;
+		for (Triangle3D t : faces) {
+			sum += t.surfaceArea();
+		}
+		
+		return sum;
 	}
 
+	public double volume() {
+		double sum = 0;
+		for (Triangle3D t : faces) {
+			ArrayList<Point3D> ps = t.vertices();
+			Tetrahedron th = new Tetrahedron(ps.get(0), ps.get(1), ps.get(2), new Point3D(0, 0, 0));
+			sum += th.volume(true);
+		}
+		
+		return Math.abs(sum);
+	}
 }
