@@ -32,7 +32,8 @@ public class Torus extends ParametricSurface3D {
 
 	@Override
 	public String toString() {
-		return "Torus - " + super.toString() + "\n" + "R = " + R + "; r = " + r;
+		return "Torus - " + super.toString() + "\n" + "R = " + R + "; r = " + r + 
+				"\n" + "Surface area: " + super.surfaceArea();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public abstract class ParametricSurface3D implements Surface3D {
 	protected static final Vector3D 	I_VECTOR = new Vector3D(1.0, 0.0, 0.0);
 	protected static final Vector3D 	J_VECTOR = new Vector3D(0.0, 1.0, 0.0);
 	protected static final Vector3D 	K_VECTOR = new Vector3D(0.0, 0.0, 1.0);
+	private static final int   INTEGRATION_STEPS = 100;
 	
 	protected double 	t0;
 	protected double 	t1;
@@ -63,7 +64,53 @@ public abstract class ParametricSurface3D implements Surface3D {
 	
 	//IIr||RtxRs||dtds
 	public double surfaceArea() {
-		return 0.0;
+		double[] It = new double[INTEGRATION_STEPS + 1]; //Divide s in 100 parts
+		double stepsize = (t1-t0)/INTEGRATION_STEPS;
+		for(int i = 0; i<It.length; i++) {
+			double valS = s0 + (s1-s0)/INTEGRATION_STEPS*i;
+			It[i] = trapezoid(stepsize,valS,t0,t1);
+		}
+		double Is = simpson(It, (s1 - s0)/INTEGRATION_STEPS);
+		return Is;
+	}
+	
+	private double trapezoid(double step, double x, double t0, double tn) {
+		double I = 0;
+		for(double i = t0; i <= tn + 10E-14; i+=step) {
+			if(i==t0 || (i <= tn + 10E-14 && i >= tn - 10E-14)) {
+				Vector3D Rt = computeRt(i,x); 
+				Vector3D Rs = computeRs(i,x);
+				Vector3D R = Rt.crossProduct(Rs);
+				double norm = R.getNorm();
+				I += 0.5*norm;
+			}
+			else {
+				Vector3D Rt = computeRt(i,x); 
+				Vector3D Rs = computeRs(i,x);
+				Vector3D R = Rt.crossProduct(Rs);
+				double norm = R.getNorm();
+				I += norm;
+			}
+				
+		}
+		return step * I;
+	}
+	
+	private double simpson(double[] It, double stepsize) {
+		double Is = 0;
+		for(int i = 0; i <It.length; i++) {
+			if(i==0 || i==It.length-1) {
+				Is += It[i];
+			}
+			else if(i%2 == 0) {
+				Is += (2*It[i]);
+			}
+			else {
+				Is += (4*It[i]);
+			}
+		}
+		Is = Is * (stepsize/3);
+		return Is;
 	}
 	
 	@Override
