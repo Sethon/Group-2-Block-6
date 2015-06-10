@@ -29,4 +29,16 @@ public class Triangle3D implements Surface3D {
 		tmp.add(this);
 		return tmp;
 	}
+	
+	public double Area(){
+		
+		double u = p1.dist(p2);
+		double v = p1.dist(p3);
+		double w = p2.dist(p3);
+		
+		double s = 0.5*(u+v+w);
+		
+		return Math.sqrt(s*(s-u)*(s-v)*(s-w));
+	}
 }
+
