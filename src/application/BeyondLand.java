@@ -23,8 +23,8 @@ public class BeyondLand {
 		//sM.addSurface(new Spiral(1.0, 2.0, 0.0, 1.0, 30, 30));
 		//===========TEMPORARY===========
 		//sM.addSurface(new FVPolygonMesh());
-		PLYReader rd = new PLYReader(50);
-		FVPolygonMesh pm = rd.getFVMesh("data/bunny.ply");
+		PLYReader rd = new PLYReader(1);
+		FVPolygonMesh pm = rd.getFVMesh("data/sphere.ply");
 		sM.addSurface(pm);
 	}
 }
