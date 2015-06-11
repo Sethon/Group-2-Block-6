@@ -22,7 +22,7 @@ public class PLYWriter {
 					+ "property double64 y" + "\n"
 					+ "property double64 z" + "\n"
 					+ "element face " + faces.size() + "\n"
-					+ "property list uint8 int32 vertex_indices" + "\n"
+					+ "property list int16 int16 vertex_indices" + "\n"
 					+ "end_header");
 			for (Point3D v : vertices) {
 				writer.newLine();
