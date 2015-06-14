@@ -2,7 +2,7 @@ package surfaces;
 
 import java.util.ArrayList;
 
-public class Tetrahedron implements Surface3D {
+public class Tetrahedron extends Surface3D {
 	private Point3D p1;
 	private Point3D p2;
 	private Point3D p3;

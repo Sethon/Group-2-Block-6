@@ -46,7 +46,9 @@ public class Point3D {
 	
 	public boolean equals(Object o) {
 		Point3D p3d = (Point3D) o;
-		return (p3d.getX() == x) && (p3d.getY() == y) && (p3d.getZ() == z);
+		return (p3d.getX() <= x + 10E-14) && (p3d.getX() >= x - 10E-14) && 
+				(p3d.getY() <= y + 10E-14) && (p3d.getY() >= y - 10E-14) && 
+				(p3d.getZ() <= z + 10E-14) && (p3d.getZ() >= z - 10E-14);
 	}
 	
 	public Point3D clone() {

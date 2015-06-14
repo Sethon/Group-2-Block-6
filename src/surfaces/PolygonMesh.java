@@ -2,7 +2,7 @@ package surfaces;
 
 import java.util.ArrayList;
 
-public abstract class PolygonMesh implements EditableSurface {
+public abstract class PolygonMesh extends EditableSurface {
 	protected ArrayList<Point3D> vertices;
 	
 	@Override
