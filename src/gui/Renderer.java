@@ -39,7 +39,7 @@ MouseWheelListener {
 	private float rotateSpeedYIncrement 				= 10;     // adjusting y rotational speed
 	private ArrayList<ArrayList<Triangle3D>> triangles 	= new ArrayList<>();
 	private GLU glu 									= new GLU();
-	
+
 	private boolean faces 								= true;
 	private boolean edges 								= true;
 	private boolean vertices 							= false;
@@ -48,7 +48,7 @@ MouseWheelListener {
 
 	private float rotateX;    // rotation amounts about axes, controlled by keyboard
 	private float rotateY;
-	
+
 	@Override
 	public void display(GLAutoDrawable arg0) {
 		GL2 gl = arg0.getGL().getGL2();  // get the OpenGL 2 graphics context
@@ -67,27 +67,6 @@ MouseWheelListener {
 		gl.glRotatef(rotateX, 1.0f, 0.0f, 0.0f); // rotate about the x-axis
 		gl.glRotatef(rotateY, 0.0f, 1.0f, 0.0f); // rotate about the y-axis
 
-		//X, Y, Z axes
-		if (axes) {
-			gl.glBegin(GL2.GL_LINES);
-			gl.glColor3f(1.0f, 0.0f, 0.0f);
-			gl.glVertex3f(100.0f, 0.0f, 0.0f);
-			gl.glVertex3f(-100.0f, 0.0f, 0.0f);
-			gl.glEnd();
-			
-			gl.glBegin(GL2.GL_LINES);
-			gl.glColor3f(0.0f, 1.0f, 0.0f);
-			gl.glVertex3f(0.0f, 100.0f, 0.0f);
-			gl.glVertex3f(0.0f, -100.0f, 0.0f);
-			gl.glEnd();
-			
-			gl.glBegin(GL2.GL_LINES);
-			gl.glColor3f(0.0f, 0.0f, 1.0f);
-			gl.glVertex3f(0.0f, 0.0f, 100.0f);
-			gl.glVertex3f(0.0f, 0.0f, -100.0f);
-			gl.glEnd();
-		}
-		
 		//XY plane grid
 		if (grid) {
 			gl.glBegin(GL2.GL_LINES);
@@ -97,7 +76,7 @@ MouseWheelListener {
 				gl.glVertex3f(x, 50.0f, 0.0f);
 			}
 			gl.glEnd();
-			
+
 			gl.glBegin(GL2.GL_LINES);
 			gl.glColor3f(0.5f, 0.5f, 0.5f);
 			for (float y = - 50; y <= 50; y += 1.0f) {
@@ -106,7 +85,28 @@ MouseWheelListener {
 			}
 			gl.glEnd();
 		}
-		
+
+		//X, Y, Z axes
+		if (axes) {
+			gl.glBegin(GL2.GL_LINES);
+			gl.glColor3f(1.0f, 0.0f, 0.0f);
+			gl.glVertex3f(100.0f, 0.0f, 0.0f);
+			gl.glVertex3f(-100.0f, 0.0f, 0.0f);
+			gl.glEnd();
+
+			gl.glBegin(GL2.GL_LINES);
+			gl.glColor3f(0.0f, 1.0f, 0.0f);
+			gl.glVertex3f(0.0f, 100.0f, 0.0f);
+			gl.glVertex3f(0.0f, -100.0f, 0.0f);
+			gl.glEnd();
+
+			gl.glBegin(GL2.GL_LINES);
+			gl.glColor3f(0.0f, 0.0f, 1.0f);
+			gl.glVertex3f(0.0f, 0.0f, 100.0f);
+			gl.glVertex3f(0.0f, 0.0f, -100.0f);
+			gl.glEnd();
+		}
+
 		for (int k = 0; k < triangles.size(); k++) {
 			ArrayList<Triangle3D> trl = triangles.get(k); 
 			double zMax = Integer.MIN_VALUE;
@@ -144,7 +144,7 @@ MouseWheelListener {
 
 			for (int i = 0; i < trl.size(); i++) {
 				ArrayList<Point3D> ps = trl.get(i).vertices();
-				
+
 				//triangles
 				if (faces) {
 					gl.glBegin(GL2.GL_TRIANGLES);
@@ -263,7 +263,7 @@ MouseWheelListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+
 	}
 
 	@Override
