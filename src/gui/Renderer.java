@@ -27,6 +27,7 @@ MouseWheelListener {
 	public final static String RENDER_TRIANGLES 		= "Coloured plot";
 	public final static String RENDER_LINES 			= "Show edges";
 	public final static String RENDER_AXES 				= "Show axes";
+	public final static String RENDER_GRID 				= "Show XY plane";
 
 	private final float MAX_Z 							= 100000.0f;	// maximal zoom in 
 	private final float MIN_Z 							= -100000.0f;	
@@ -43,6 +44,7 @@ MouseWheelListener {
 	private boolean edges 								= true;
 	private boolean vertices 							= false;
 	private boolean axes								= true;
+	private boolean grid								= false;
 
 	private float rotateX;    // rotation amounts about axes, controlled by keyboard
 	private float rotateY;
@@ -83,6 +85,25 @@ MouseWheelListener {
 			gl.glColor3f(0.0f, 0.0f, 1.0f);
 			gl.glVertex3f(0.0f, 0.0f, 100.0f);
 			gl.glVertex3f(0.0f, 0.0f, -100.0f);
+			gl.glEnd();
+		}
+		
+		//XY plane grid
+		if (grid) {
+			gl.glBegin(GL2.GL_LINES);
+			gl.glColor3f(0.5f, 0.5f, 0.5f);
+			for (float x = - 50; x <= 50; x += 1.0f) {
+				gl.glVertex3f(x, -50.0f, 0.0f);
+				gl.glVertex3f(x, 50.0f, 0.0f);
+			}
+			gl.glEnd();
+			
+			gl.glBegin(GL2.GL_LINES);
+			gl.glColor3f(0.5f, 0.5f, 0.5f);
+			for (float y = - 50; y <= 50; y += 1.0f) {
+				gl.glVertex3f(-50.0f, y, 0.0f);
+				gl.glVertex3f(50.0f, y, 0.0f);
+			}
 			gl.glEnd();
 		}
 		
@@ -310,6 +331,9 @@ MouseWheelListener {
 			break;
 		case RENDER_AXES:
 			axes = flag;
+			break;
+		case RENDER_GRID:
+			grid = flag;
 			break;
 		}
 	}
