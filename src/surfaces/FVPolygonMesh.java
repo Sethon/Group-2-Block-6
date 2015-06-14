@@ -9,12 +9,16 @@ public class FVPolygonMesh extends PolygonMesh {
 	
 	public FVPolygonMesh(ArrayList<Point3D> vertices, ArrayList<Triangle3D> faces,
 			ArrayList<ArrayList<Triangle3D>> verticesToFaces) {
+		instCnt++;
+		assignLabel();
 		super.vertices = vertices;
 		this.faces = faces;
 		this.verticesToFaces = verticesToFaces;
 	}
 	
 	public FVPolygonMesh() {
+		instCnt++;
+		assignLabel();
 		vertices = new ArrayList<>();
 		faces = new ArrayList<>();
 		verticesToFaces = new ArrayList<ArrayList<Triangle3D>>();
@@ -41,19 +45,19 @@ public class FVPolygonMesh extends PolygonMesh {
 			vertices.add(p);
 			verticesToFaces.add(new ArrayList<>());
 		} else {
-			ArrayList<Integer> tmp = find2ClosestPs(p);
+			int[] tmp = find2ClosestPs(p);
 			vertices.add(p);
-			Triangle3D newFace = new Triangle3D(p, vertices.get(tmp.get(0)), 
-					vertices.get(tmp.get(1)));
+			Triangle3D newFace = new Triangle3D(vertices.get(tmp[0]), 
+					 p, vertices.get(tmp[1]));
 			faces.add(newFace);
-			verticesToFaces.get(tmp.get(0)).add(newFace);
-			verticesToFaces.get(tmp.get(1)).add(newFace);
+			verticesToFaces.get(tmp[0]).add(newFace);
+			verticesToFaces.get(tmp[1]).add(newFace);
 			verticesToFaces.add(new ArrayList<>());
 			verticesToFaces.get(verticesToFaces.size() - 1).add(newFace);
 		}
 	}
 	
-	private ArrayList<Integer> find2ClosestPs(Point3D p) {
+	private int[] find2ClosestPs(Point3D p) {
 		Point3D v1 = vertices.get(0);
 		Point3D v2 = vertices.get(1);
 		int v1Ind = 0;
@@ -73,7 +77,8 @@ public class FVPolygonMesh extends PolygonMesh {
 		
 		for (int i = 0; i < vertices.size(); i++) {
 			double tmp = p.dist(vertices.get(i));
-			if (tmp <= diffV2 && !vertices.get(i).equals(v1)) {
+			Triangle3D t = new Triangle3D(p, v1, vertices.get(i));
+			if (tmp <= diffV2 && !vertices.get(i).equals(v1) && (t.surfaceArea() != 0)) {
 				diffV2 = tmp;
 				v2 = vertices.get(i);
 				v2Ind = i;
@@ -85,11 +90,7 @@ public class FVPolygonMesh extends PolygonMesh {
 		res1.add(v2);
 		
 		
-		ArrayList<Integer> res2 = new ArrayList<>();
-		res2.add(v1Ind);
-		res2.add(v2Ind);
-		
-		return res2;
+		return new int[] {v1Ind, v2Ind};
 	}
 	
 	@Override

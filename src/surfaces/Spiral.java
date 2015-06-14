@@ -3,6 +3,8 @@ package surfaces;
 public class Spiral extends ParametricSurface3D {
 
 	public Spiral(double t0, double t1, double s0, double s1, int n1, int n2) {
+		instCnt++;
+		assignLabel();
 		super.t0 = t0;
 		super.t1 = t1;
 		super.s0 = s0;
@@ -29,7 +31,7 @@ public class Spiral extends ParametricSurface3D {
 	@Override
 	public String toString() {
 		return "Spiral - " + super.toString() + 
-				"\n" + "Surface area: " + super.surfaceArea();
+				"\n" + "Surface area: " + super.surfaceArea() + " sq. u.";
 	}
 
 	@Override

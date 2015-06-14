@@ -3,7 +3,7 @@ package surfaces;
 import java.util.ArrayList;
 
 
-public class Triangle3D implements Surface3D {
+public class Triangle3D extends Surface3D {
 	private Point3D p1;
 	private Point3D p2;
 	private Point3D p3;
@@ -39,6 +39,11 @@ public class Triangle3D implements Surface3D {
 		double s = 0.5*(u+v+w);
 		
 		return Math.sqrt(s*(s-u)*(s-v)*(s-w));
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + p1.toString() + "; " + p2.toString() + "; " + p3.toString() + "]";
 	}
 }
 

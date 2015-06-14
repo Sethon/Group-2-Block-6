@@ -1,5 +1,5 @@
 package surfaces;
 
-public interface EditableSurface extends Surface3D {
-	public void addVertex(Point3D p);
+public abstract class EditableSurface extends Surface3D {
+	public abstract void addVertex(Point3D p);
 }

@@ -5,6 +5,8 @@ public class Torus extends ParametricSurface3D {
 	private double r;
 	
 	public Torus(double t0, double t1, double s0, double s1, int n1, int n2, double R, double r) {
+		instCnt++;
+		assignLabel();
 		super.t0 = t0;
 		super.t1 = t1;
 		super.s0 = s0;
@@ -32,8 +34,8 @@ public class Torus extends ParametricSurface3D {
 
 	@Override
 	public String toString() {
-		return "Torus - " + super.toString() + "\n" + "R = " + R + "; r = " + r + 
-				"\n" + "Surface area: " + super.surfaceArea();
+		return "Torus - " + super.toString() + "\n" + "R = " + R + " u." + "; r = " + r + " u." +
+				"\n" + "Surface area: " + super.surfaceArea() + " sq. u.";
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 
-public abstract class ParametricSurface3D implements Surface3D {
+public abstract class ParametricSurface3D extends Surface3D {
 	//unit vectors
 	protected static final Vector3D 	I_VECTOR = new Vector3D(1.0, 0.0, 0.0);
 	protected static final Vector3D 	J_VECTOR = new Vector3D(0.0, 1.0, 0.0);
@@ -115,7 +115,6 @@ public abstract class ParametricSurface3D implements Surface3D {
 	
 	@Override
 	public ArrayList<Triangle3D> triangulate() {
-		double area = 0;
 		ArrayList<Triangle3D> tmp = new ArrayList<>();
 		for (double t = t0; t < t1 - 10E-14; t += (t1 - t0)/n1) {
 	    	for (double s = s0; s < s1 - 10E-14; s += (s1 - s0)/n2) {
@@ -123,7 +122,6 @@ public abstract class ParametricSurface3D implements Surface3D {
 	    				new Point3D(computeX(t + (t1 - t0)/n1, s), computeY(t + (t1 - t0)/n1, s), computeZ(t + (t1 - t0)/n1, s)),
 	    				new Point3D(computeX(t, s + (s1 - s0)/n2), computeY(t, s + (s1 - s0)/n2), computeZ(t, s + (s1 - s0)/n2)));
 	    		tmp.add(tr);
-	    		area += tr.surfaceArea();
 	    	}
 	    }
 		
@@ -133,7 +131,6 @@ public abstract class ParametricSurface3D implements Surface3D {
 	    				new Point3D(computeX(t - (t1 - t0)/n1, s), computeY(t - (t1 - t0)/n1, s), computeZ(t - (t1 - t0)/n1, s)),
 	    				new Point3D(computeX(t, s - (s1 - s0)/n2), computeY(t, s - (s1 - s0)/n2), computeZ(t, s - (s1 - s0)/n2)));
 	    		tmp.add(tr);
-	    		area += tr.surfaceArea();
 	    	}
 	    }
 		return tmp;
