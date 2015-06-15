@@ -2,11 +2,7 @@ package surfaces;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 public class NURBS extends EditableSurface {
-=======
-public class NURBS extends Surface3D {
->>>>>>> 576c5cc45660b0da2da5adce8a691db9b2d146e4
 
      private ArrayList<Double> knotsU;
      private ArrayList<Double> knotsV;
