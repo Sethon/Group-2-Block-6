@@ -1,13 +1,11 @@
 package surfaces;
-public class WPoint3D {
+public class WPoint3D extends Point3D {
 
-     private double x;
-     private double y;
-     private double z;
      private double weight;
 
      public WPoint3D(double x, double y, double z, double weight) {
-          this.x = x; this.y = y; this.z = z; this.weight = weight;
+          super(x,y,z);
+          this.weight = weight;
      }
 
      public double getWeight() {
@@ -16,30 +14,6 @@ public class WPoint3D {
 
      public void setWeight(double weight) {
           this.weight = weight;
-     }
-
-     public double getZ() {
-          return z;
-     }
-
-     public void setZ(double z) {
-          this.z = z;
-     }
-
-     public double getY() {
-          return y;
-     }
-
-     public void setY(double y) {
-          this.y = y;
-     }
-
-     public double getX() {
-          return x;
-     }
-
-     public void setX(double x) {
-          this.x = x;
      }
 
      public WPoint3D multiply(double factor) {
@@ -59,10 +33,10 @@ public class WPoint3D {
      }
 
      public Point3D convert() {
-          return new Point3D(x/weight, y/weight, z/weight);
+          return new Point3D(getX()/weight, getY()/weight, getZ()/weight);
      }
 
      public String toString() {
-          return "[" + x + "][" + y + "][" + z + "][" + weight + "]";
+          return super.toString() + "[" + weight + "]";
      }
 }

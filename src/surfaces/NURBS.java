@@ -2,7 +2,7 @@ package surfaces;
 
 import java.util.ArrayList;
 
-public class NURBS implements Surface3D {
+public class NURBS extends EditableSurface {
 
      private ArrayList<Double> knotsU;
      private ArrayList<Double> knotsV;
@@ -229,7 +229,7 @@ public class NURBS implements Surface3D {
                for (int j = 0; j <= degreeV; j++) {
                     Point3D p = controlNet.get(uSpan - degreeU + i).get(vSpan - degreeV + j);
                     double w = weights.get(uSpan - degreeU + i).get(vSpan - degreeV + j);
-                    pW[i][j] = p.convert(w);
+                    //pW[i][j] = p.convert(w);
                }
           }
           return pW;
@@ -252,6 +252,11 @@ public class NURBS implements Surface3D {
      @Override
      public double surfaceArea() {
           return 0;
+     }
+
+     @Override
+     public void addVertex(Point3D p) {
+
      }
 }
 
