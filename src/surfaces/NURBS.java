@@ -2,7 +2,7 @@ package surfaces;
 
 import java.util.ArrayList;
 
-public class NURBS implements Surface3D {
+public class NURBS extends Surface3D {
 
      private ArrayList<Double> knotsU;
      private ArrayList<Double> knotsV;
